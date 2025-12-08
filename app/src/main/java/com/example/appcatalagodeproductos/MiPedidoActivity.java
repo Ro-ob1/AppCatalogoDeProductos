@@ -79,10 +79,8 @@ public class MiPedidoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!CarritoManager.getInstance().estaVacio()) {
-                    // TODO: Navegar a ResumenPedidoActivity
-                    Toast.makeText(MiPedidoActivity.this,
-                            "Ir a Resumen de Pedido - Próximamente",
-                            Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MiPedidoActivity.this, ResumenPedidoActivity.class);
+                    startActivity(intent);
                 }
             }
         });
