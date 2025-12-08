@@ -257,6 +257,13 @@ public class CatalogoActivity extends AppCompatActivity {
             }
         }
         adapter.actualizarLista(listaProductosFiltrada);
+
+        // Verificar si se recibió un filtro de categoría
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("categoria_filtro")) {
+            String categoriaFiltro = intent.getStringExtra("categoria_filtro");
+            aplicarFiltroCategoriaInicial(categoriaFiltro);
+        }
     }
 
     private void filtrarProductos(String texto) {
@@ -300,5 +307,27 @@ public class CatalogoActivity extends AppCompatActivity {
             }
         }
         return productos;
+    }
+
+    private void aplicarFiltroCategoriaInicial(String categoria) {
+        // Buscar la posición de la categoría en el spinner
+        int posicion = 0;
+        switch (categoria) {
+            case "Ropa":
+                posicion = 1;
+                break;
+            case "Mochilas":
+                posicion = 2;
+                break;
+            case "Accesorios":
+                posicion = 3;
+                break;
+            default:
+                posicion = 0; // Todas
+                break;
+        }
+
+        // Seleccionar la categoría en el spinner
+        spinnerCategorias.setSelection(posicion);
     }
 }

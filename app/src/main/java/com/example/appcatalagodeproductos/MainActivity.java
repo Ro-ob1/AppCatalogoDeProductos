@@ -42,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
         btnCategorias.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Categorías - Próximamente", Toast.LENGTH_SHORT).show();
-                // TODO: Navegar a CategoriasActivity
+                Intent intent = new Intent(MainActivity.this, CategoriasActivity.class);
+                startActivity(intent);
             }
         });
 
