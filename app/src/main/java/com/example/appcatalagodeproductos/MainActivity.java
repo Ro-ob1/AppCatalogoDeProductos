@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
         btnContacto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Contacto - Próximamente", Toast.LENGTH_SHORT).show();
-                // TODO: Navegar a ContactoActivity
+                Intent intent = new Intent(MainActivity.this, ContactoActivity.class);
+                startActivity(intent);
             }
         });
     }
