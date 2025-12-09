@@ -26,15 +26,38 @@
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/primary" />
 
-    <Button
-        android:id="@+id/btnMiPedido"
+    <!-- Mi Pedido con Badge -->
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Mi Pedido"
-        android:textSize="18sp"
-        android:padding="16dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/secondary" />
+        android:layout_marginBottom="16dp">
+
+        <Button
+            android:id="@+id/btnMiPedido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mi Pedido"
+            android:textSize="18sp"
+            android:padding="16dp"
+            android:backgroundTint="@color/secondary" />
+
+        <!-- Badge de cantidad -->
+        <TextView
+            android:id="@+id/tvBadgeCarrito"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="12dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/badge_background"
+            android:text="0"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:visibility="gone" />
+
+    </RelativeLayout>
 
     <Button
         android:id="@+id/btnCategorias"

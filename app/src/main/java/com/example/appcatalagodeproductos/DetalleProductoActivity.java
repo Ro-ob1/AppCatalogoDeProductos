@@ -24,7 +24,9 @@ public class DetalleProductoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_producto);
 
-        // Inicializar vistas
+        // Inicializar FavoritosManager
+        FavoritosManager.getInstance(this);
+
         ivProductoDetalle = findViewById(R.id.ivProductoDetalle);
         tvNombreDetalle = findViewById(R.id.tvNombreDetalle);
         tvCategoriaDetalle = findViewById(R.id.tvCategoriaDetalle);
@@ -35,16 +37,14 @@ public class DetalleProductoActivity extends AppCompatActivity {
         btnAgregarFavoritos = findViewById(R.id.btnAgregarFavoritos);
         btnVolverCatalogo = findViewById(R.id.btnVolverCatalogo);
 
-        // Obtener datos del producto desde el Intent
         recibirDatosProducto();
 
-        // Mostrar información del producto
         if (productoActual != null) {
             mostrarDetallesProducto();
         }
 
-        // Configurar botones
         configurarBotones();
+        actualizarBotonFavoritos();
     }
 
     private void recibirDatosProducto() {
@@ -71,7 +71,6 @@ public class DetalleProductoActivity extends AppCompatActivity {
         tvDescripcionDetalle.setText(productoActual.getDescripcion());
         ivProductoDetalle.setImageResource(productoActual.getImagenResId());
 
-        // Mostrar disponibilidad
         if (productoActual.isDisponible()) {
             tvDisponibilidadDetalle.setText("En stock");
             tvDisponibilidadDetalle.setTextColor(getResources().getColor(R.color.success));
@@ -85,37 +84,53 @@ public class DetalleProductoActivity extends AppCompatActivity {
     }
 
     private void configurarBotones() {
-        // Botón Agregar al Pedido
         btnAgregarAlPedido.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (productoActual != null) {
-                    CarritoManager.getInstance().agregarProducto(productoActual);
+                    CarritoManager.getInstance(DetalleProductoActivity.this).agregarProducto(productoActual);
                     Toast.makeText(DetalleProductoActivity.this,
-                            productoActual.getNombre() + " agregado al pedido",
+                            "✓ " + productoActual.getNombre() + " agregado al pedido",
                             Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        // Botón Agregar a Favoritos
         btnAgregarFavoritos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (productoActual != null) {
-                    Toast.makeText(DetalleProductoActivity.this,
-                            productoActual.getNombre() + " agregado a favoritos",
-                            Toast.LENGTH_SHORT).show();
+                    FavoritosManager.getInstance().toggleFavorito(productoActual.getId());
+                    actualizarBotonFavoritos();
+
+                    if (FavoritosManager.getInstance().esFavorito(productoActual.getId())) {
+                        Toast.makeText(DetalleProductoActivity.this,
+                                "❤️ Agregado a favoritos",
+                                Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(DetalleProductoActivity.this,
+                                "💔 Eliminado de favoritos",
+                                Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
 
-        // Botón Volver al Catálogo
         btnVolverCatalogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+    }
+
+    private void actualizarBotonFavoritos() {
+        if (productoActual != null && FavoritosManager.getInstance().esFavorito(productoActual.getId())) {
+            btnAgregarFavoritos.setText("❤️ En Favoritos");
+            btnAgregarFavoritos.setBackgroundTintList(getResources().getColorStateList(R.color.error));
+        } else {
+            btnAgregarFavoritos.setText("🤍 Agregar a Favoritos");
+            btnAgregarFavoritos.setBackgroundTintList(getResources().getColorStateList(R.color.accent));
+        }
     }
 }

@@ -42,7 +42,7 @@ public class MiPedidoActivity extends AppCompatActivity {
         recyclerViewPedido.setHasFixedSize(true);
 
         // Configurar adapter
-        adapter = new PedidoAdapter(this, CarritoManager.getInstance().obtenerItems(), new PedidoAdapter.OnCantidadChangeListener() {
+        adapter = new PedidoAdapter(this, CarritoManager.getInstance(this).obtenerItems(), new PedidoAdapter.OnCantidadChangeListener() {
             @Override
             public void onCantidadChanged() {
                 actualizarInterfaz();
@@ -61,7 +61,7 @@ public class MiPedidoActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         // Actualizar la lista cuando se regrese a esta actividad
-        adapter.actualizarLista(CarritoManager.getInstance().obtenerItems());
+        adapter.actualizarLista(CarritoManager.getInstance(this).obtenerItems());
         actualizarInterfaz();
     }
 
@@ -96,7 +96,7 @@ public class MiPedidoActivity extends AppCompatActivity {
     }
 
     private void actualizarInterfaz() {
-        if (CarritoManager.getInstance().estaVacio()) {
+        if (CarritoManager.getInstance(this).estaVacio()) {
             // Mostrar mensaje de carrito vacío
             recyclerViewPedido.setVisibility(View.GONE);
             layoutFooterPedido.setVisibility(View.GONE);
@@ -108,11 +108,11 @@ public class MiPedidoActivity extends AppCompatActivity {
             layoutCarritoVacio.setVisibility(View.GONE);
 
             // Actualizar cantidad de productos
-            int cantidadTotal = CarritoManager.getInstance().obtenerCantidadTotal();
+            int cantidadTotal = CarritoManager.getInstance(this).obtenerCantidadTotal();
             tvCantidadProductos.setText(cantidadTotal + (cantidadTotal == 1 ? " producto" : " productos"));
 
             // Actualizar total
-            double total = CarritoManager.getInstance().calcularTotal();
+            double total = CarritoManager.getInstance(this).calcularTotal();
             tvTotalPedido.setText(String.format(Locale.getDefault(), "$%.2f", total));
         }
     }
@@ -129,5 +129,7 @@ public class MiPedidoActivity extends AppCompatActivity {
                 })
                 .setNegativeButton("Cancelar", null)
                 .show();
+        CarritoManager.getInstance(MiPedidoActivity.this).vaciarCarrito();
+        adapter.actualizarLista(CarritoManager.getInstance(MiPedidoActivity.this).obtenerItems());
     }
 }

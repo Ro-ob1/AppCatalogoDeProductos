@@ -1,19 +1,33 @@
 package com.example.appcatalagodeproductos;
 
+import android.content.Context;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CarritoManager {
     private static CarritoManager instance;
     private HashMap<Integer, ItemPedido> itemsCarrito;
+    private CarritoPreferences preferences;
+    private Context context;
 
-    private CarritoManager() {
-        itemsCarrito = new HashMap<>();
+    private CarritoManager(Context context) {
+        this.context = context.getApplicationContext();
+        this.preferences = new CarritoPreferences(this.context);
+        // Cargar carrito guardado
+        this.itemsCarrito = preferences.cargarCarrito();
     }
 
+    public static CarritoManager getInstance(Context context) {
+        if (instance == null) {
+            instance = new CarritoManager(context);
+        }
+        return instance;
+    }
+
+    // Método de compatibilidad (sin Context)
     public static CarritoManager getInstance() {
         if (instance == null) {
-            instance = new CarritoManager();
+            throw new IllegalStateException("CarritoManager debe inicializarse con Context primero");
         }
         return instance;
     }
@@ -21,18 +35,18 @@ public class CarritoManager {
     // Agregar producto al carrito
     public void agregarProducto(Producto producto) {
         if (itemsCarrito.containsKey(producto.getId())) {
-            // Si ya existe, aumentar cantidad
             ItemPedido item = itemsCarrito.get(producto.getId());
             item.setCantidad(item.getCantidad() + 1);
         } else {
-            // Si no existe, agregarlo con cantidad 1
             itemsCarrito.put(producto.getId(), new ItemPedido(producto, 1));
         }
+        guardarCarrito();
     }
 
     // Eliminar producto del carrito
     public void eliminarProducto(int productoId) {
         itemsCarrito.remove(productoId);
+        guardarCarrito();
     }
 
     // Aumentar cantidad de un producto
@@ -40,6 +54,7 @@ public class CarritoManager {
         if (itemsCarrito.containsKey(productoId)) {
             ItemPedido item = itemsCarrito.get(productoId);
             item.setCantidad(item.getCantidad() + 1);
+            guardarCarrito();
         }
     }
 
@@ -50,9 +65,9 @@ public class CarritoManager {
             if (item.getCantidad() > 1) {
                 item.setCantidad(item.getCantidad() - 1);
             } else {
-                // Si la cantidad es 1, eliminar el producto
                 eliminarProducto(productoId);
             }
+            guardarCarrito();
         }
     }
 
@@ -82,10 +97,16 @@ public class CarritoManager {
     // Vaciar carrito
     public void vaciarCarrito() {
         itemsCarrito.clear();
+        guardarCarrito();
     }
 
     // Verificar si el carrito está vacío
     public boolean estaVacio() {
         return itemsCarrito.isEmpty();
+    }
+
+    // Guardar carrito en SharedPreferences
+    private void guardarCarrito() {
+        preferences.guardarCarrito(itemsCarrito);
     }
 }

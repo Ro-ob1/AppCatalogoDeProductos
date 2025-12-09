@@ -39,7 +39,7 @@ public class ResumenPedidoActivity extends AppCompatActivity {
         btnCancelar = findViewById(R.id.btnCancelar);
 
         // Obtener datos del carrito
-        listaItems = CarritoManager.getInstance().obtenerItems();
+        listaItems = CarritoManager.getInstance(this).obtenerItems();
 
         // Verificar si el carrito está vacío
         if (listaItems.isEmpty()) {
@@ -62,7 +62,7 @@ public class ResumenPedidoActivity extends AppCompatActivity {
     }
 
     private void calcularTotales() {
-        subtotal = CarritoManager.getInstance().calcularTotal();
+        subtotal = CarritoManager.getInstance(this).calcularTotal();
         total = subtotal + costoEnvio;
     }
 
@@ -150,7 +150,7 @@ public class ResumenPedidoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Vaciar el carrito
-                CarritoManager.getInstance().vaciarCarrito();
+                CarritoManager.getInstance(ResumenPedidoActivity.this).vaciarCarrito();
 
                 dialog.dismiss();
 

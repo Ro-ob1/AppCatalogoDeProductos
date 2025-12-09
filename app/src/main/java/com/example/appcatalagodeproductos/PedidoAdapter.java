@@ -44,31 +44,30 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.PedidoView
         holder.tvSubtotal.setText(String.format(Locale.getDefault(), "Subtotal: $%.2f", item.getSubtotal()));
         holder.ivProducto.setImageResource(producto.getImagenResId());
 
-        // Botón Aumentar
-        holder.btnAumentar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CarritoManager.getInstance().aumentarCantidad(producto.getId());
-                notifyItemChanged(position);
-                if (listener != null) {
-                    listener.onCantidadChanged();
-                }
+        // Configurar listeners usando el ID del producto (más seguro)
+        holder.btnAumentar.setOnClickListener(v -> {
+            CarritoManager.getInstance().aumentarCantidad(producto.getId());
+            int pos = holder.getAdapterPosition();
+            if (pos != RecyclerView.NO_POSITION) {
+                notifyItemChanged(pos);
+            }
+            if (listener != null) {
+                listener.onCantidadChanged();
             }
         });
 
-        // Botón Disminuir
-        holder.btnDisminuir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CarritoManager.getInstance().disminuirCantidad(producto.getId());
-                if (CarritoManager.getInstance().estaVacio()) {
-                    notifyDataSetChanged();
-                } else {
-                    notifyItemChanged(position);
+        holder.btnDisminuir.setOnClickListener(v -> {
+            CarritoManager.getInstance().disminuirCantidad(producto.getId());
+            if (CarritoManager.getInstance().estaVacio()) {
+                notifyDataSetChanged();
+            } else {
+                int pos = holder.getAdapterPosition();
+                if (pos != RecyclerView.NO_POSITION) {
+                    notifyItemChanged(pos);
                 }
-                if (listener != null) {
-                    listener.onCantidadChanged();
-                }
+            }
+            if (listener != null) {
+                listener.onCantidadChanged();
             }
         });
     }
