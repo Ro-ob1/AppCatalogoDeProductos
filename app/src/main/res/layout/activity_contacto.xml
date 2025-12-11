@@ -23,13 +23,13 @@
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@mipmap/ic_launcher"
+                android:src="@drawable/logo1"
                 android:contentDescription="Logo del negocio" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mi Tienda"
+                android:text="Clothes &amp; Co."
                 android:textSize="28sp"
                 android:textStyle="bold"
                 android:textColor="@color/white"

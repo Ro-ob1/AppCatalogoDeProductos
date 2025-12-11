@@ -190,6 +190,93 @@ public class CatalogoActivity extends AppCompatActivity {
 
         productosPorCategoria.put("Accesorios", productosAccesorios);
 
+        // ========== CATEGORÍA: BOLSOS ==========
+        HashMap<Integer, Producto> productosBolsos = new HashMap<>();
+
+        productosBolsos.put(12, new Producto(
+                12,
+                "Bolso de Mano Elegante",
+                "Bolso compacto ideal para salidas casuales o formales",
+                359.00,
+                "Bolsos",
+                ImagenesProductos.BOLSO_MANO,
+                true
+        ));
+
+        productosBolsos.put(13, new Producto(
+                13,
+                "Bolso Crossbody",
+                "Bolso ligero con correa ajustable, perfecto para el día a día",
+                299.99,
+                "Bolsos",
+                ImagenesProductos.BOLSO_CROSSBODY,
+                true
+        ));
+
+        productosBolsos.put(14, new Producto(
+                14,
+                "Tote Bag Ecológica",
+                "Bolsa ecológica de lona resistente estilo moderno",
+                189.50,
+                "Bolsos",
+                ImagenesProductos.TOTE_BAG,
+                true
+        ));
+
+        productosBolsos.put(15, new Producto(
+                15,
+                "Shoulder Bag",
+                "Bolso de hombro con diseño minimalista y juvenil",
+                449.00,
+                "Bolsos",
+                ImagenesProductos.SHOULDER_BAG,
+                true
+        ));
+
+        productosBolsos.put(16, new Producto(
+                16,
+                "Bolso Deportivo",
+                "Bolsa amplia ideal para gimnasio y viajes cortos",
+                529.00,
+                "Bolsos",
+                ImagenesProductos.BOLSO_DEPORTIVO,
+                true
+        ));
+
+        productosBolsos.put(17, new Producto(
+                17,
+                "Cangurera Unisex",
+                "Cangurera moderna con compartimentos múltiples",
+                239.00,
+                "Bolsos",
+                ImagenesProductos.CANGURERA,
+                true
+        ));
+
+        productosBolsos.put(18, new Producto(
+                18,
+                "Mini Bolso Fashion",
+                "Bolso pequeño estilo trendy para ocasiones especiales",
+                279.99,
+                "Bolsos",
+                ImagenesProductos.MINI_BOLSO,
+                true
+        ));
+
+        productosBolsos.put(19, new Producto(
+                19,
+                "Bolso Casual",
+                "Bolso versátil para uso diario, con diseño juvenil",
+                329.50,
+                "Bolsos",
+                ImagenesProductos.BOLSO_CASUAL,
+                true
+        ));
+
+        productosPorCategoria.put("Bolsos", productosBolsos);
+
+
+
 
         // Convertir todos los productos a una lista única
         for (HashMap<Integer, Producto> categoria : productosPorCategoria.values()) {
@@ -206,6 +293,7 @@ public class CatalogoActivity extends AppCompatActivity {
         categorias.add("Todas");
         categorias.add("Ropa");
         categorias.add("Mochilas");
+        categorias.add("Bolsos");
         categorias.add("Accesorios");
 
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(
@@ -310,8 +398,8 @@ public class CatalogoActivity extends AppCompatActivity {
     }
 
     private void aplicarFiltroCategoriaInicial(String categoria) {
-        // Buscar la posición de la categoría en el spinner
         int posicion = 0;
+
         switch (categoria) {
             case "Ropa":
                 posicion = 1;
@@ -319,15 +407,18 @@ public class CatalogoActivity extends AppCompatActivity {
             case "Mochilas":
                 posicion = 2;
                 break;
-            case "Accesorios":
+            case "Bolsos":
                 posicion = 3;
+                break;
+            case "Accesorios":
+                posicion = 4;
                 break;
             default:
                 posicion = 0; // Todas
                 break;
         }
 
-        // Seleccionar la categoría en el spinner
         spinnerCategorias.setSelection(posicion);
     }
+
 }

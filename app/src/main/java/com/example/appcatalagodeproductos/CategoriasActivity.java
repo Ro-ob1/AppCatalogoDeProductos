@@ -41,25 +41,32 @@ public class CategoriasActivity extends AppCompatActivity {
         listaCategorias.add(new Categoria(
                 "Ropa",
                 "Prendas de vestir para todas las ocasiones",
-                R.mipmap.ic_launcher,
-                4  // Cantidad de productos en esta categoría
+                R.drawable.cat_ropa,
+                8  // Cantidad de productos en esta categoría
         ));
 
         // Categoría: Mochilas
         listaCategorias.add(new Categoria(
-                "Mochilas",
+                "Mochilas escolares",
                 "Mochilas escolares, deportivas y para laptop",
-                R.mipmap.ic_launcher,
-                3  // Cantidad de productos en esta categoría
+                R.drawable.cat_mochilas,
+                6 // Cantidad de productos en esta categoría
+        ));
+        listaCategorias.add(new Categoria(
+                "Bolsos",
+                "Perfectos para combinar con cualquier outfit",
+                R.drawable.cat_bolsos_mano,
+                8
         ));
 
         // Categoría: Accesorios
         listaCategorias.add(new Categoria(
-                "Accesorios",
-                "Complementos y accesorios de moda",
-                R.mipmap.ic_launcher,
-                4  // Cantidad de productos en esta categoría
+                "Accesorios & Complementos",
+                "Lentes, gorras, relojes y demás accesorios",
+                R.drawable.cat_aces,
+                15
         ));
+
     }
 
     private void abrirCatalogoFiltrado(String categoria) {

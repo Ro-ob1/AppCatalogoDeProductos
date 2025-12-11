@@ -13,6 +13,18 @@ public class ImagenesProductos {
     public static final int MOCHILA_LAPTOP =  R.drawable.producto_mochila_laptop;
     public static final int MOCHILA_DEPORTIVA = R.drawable.producto_mochila_deportiva;
 
+
+    // ========== IMÁGENES CATEGORÍA: BOLSOS ==========
+    public static final int BOLSO_MANO = R.drawable.producto_bolso_mano;
+    public static final int BOLSO_CROSSBODY = R.drawable.producto_bolso_crossbody;
+    public static final int TOTE_BAG = R.drawable.producto_tote_bag;
+    public static final int SHOULDER_BAG = R.drawable.producto_shoulder_bag;
+    public static final int BOLSO_DEPORTIVO = R.drawable.producto_bolso_deportivo;
+    public static final int CANGURERA = R.drawable.producto_cangurera;
+    public static final int MINI_BOLSO = R.drawable.producto_mini_bolso;
+    public static final int BOLSO_CASUAL = R.drawable.producto_bolso_casual;
+
+
     // ========== IMÁGENES CATEGORÍA: ACCESORIOS ==========
     public static final int GORRA_CASUAL = R.drawable.producto_gorra;
     public static final int LENTES_SOL =  R.drawable.producto_lentes;
