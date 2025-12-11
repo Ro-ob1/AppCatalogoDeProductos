@@ -14,16 +14,16 @@
 
         <ImageView
             android:id="@+id/ivLogo"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:src="@mipmap/ic_launcher"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:src="@drawable/logo"
             android:contentDescription="Logo del negocio" />
 
         <TextView
             android:id="@+id/tvNombreNegocio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mi Tienda"
+            android:text="!Bienvenidos!"
             android:textSize="32sp"
             android:textColor="@color/white"
             android:textStyle="bold"
