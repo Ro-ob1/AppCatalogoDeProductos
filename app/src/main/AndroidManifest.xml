@@ -2,54 +2,76 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Permisos para Internet y ubicación -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/app"
-
         android:label="@string/app_name"
-        android:roundIcon="@drawable/app"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCatalagoDeProductos"
         tools:targetApi="31">
+
+        <!-- API Key de Google Maps -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBfoljRA3OgoaeW_X1S7qaTGh57oGPS-jQ" />
+
+        <!-- Activities -->
         <activity
-            android:name=".ContactoActivity"
+            android:name=".SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".CatalogoActivity"
             android:exported="false"
             android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".CategoriasActivity"
-            android:exported="false"
-            android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".ResumenPedidoActivity"
-            android:exported="false"
-            android:parentActivityName=".MiPedidoActivity" />
-        <activity
-            android:name=".MiPedidoActivity"
-            android:exported="false"
-            android:parentActivityName=".MainActivity" />
+
         <activity
             android:name=".DetalleProductoActivity"
             android:exported="false"
             android:parentActivityName=".CatalogoActivity" />
-        <activity
-            android:name=".CatalogoActivity"
-            android:exported="false"
-            android:parentActivityName=".MainActivity" /> <!-- SplashActivity como pantalla de inicio -->
-        <activity
-            android:name=".SplashActivity"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity> <!-- MainActivity -->
         <activity
-            android:name=".MainActivity"
-            android:exported="false" />
+            android:name=".MiPedidoActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
+
+        <activity
+            android:name=".ResumenPedidoActivity"
+            android:exported="false"
+            android:parentActivityName=".MiPedidoActivity" />
+
+        <activity
+            android:name=".CategoriasActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
+
+        <activity
+            android:name=".ContactoActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
+
+        <!-- Nueva Activity del Mapa -->
+        <activity
+            android:name=".MapaActivity"
+            android:exported="false"
+            android:parentActivityName=".ContactoActivity" />
+
     </application>
 
 </manifest>

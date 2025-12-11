@@ -87,7 +87,8 @@ public class ContactoActivity extends AppCompatActivity {
         btnVerUbicacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                abrirMapa();
+                Intent intent = new Intent(ContactoActivity.this, MapaActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -100,7 +101,7 @@ public class ContactoActivity extends AppCompatActivity {
 
     private void abrirWhatsApp() {
         try {
-            String numero = "1234567890"; // Número sin espacios ni guiones
+            String numero = "7471840942"; // Número sin espacios ni guiones
             String mensaje = "Hola, me gustaría obtener más información sobre sus productos.";
             String url = "https://wa.me/" + numero + "?text=" + Uri.encode(mensaje);
             Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -115,7 +116,7 @@ public class ContactoActivity extends AppCompatActivity {
 
     private void abrirMapa() {
         // Coordenadas de ejemplo (Ciudad de México, Zócalo)
-        String ubicacion = "19.4326,-99.1332";
+        String ubicacion = "17.55193, -99.500411";
         String label = "Mi Tienda";
         String uri = "geo:" + ubicacion + "?q=" + ubicacion + "(" + label + ")";
 
